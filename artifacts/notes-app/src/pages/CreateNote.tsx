@@ -3,15 +3,12 @@ import { useLocation } from "wouter";
 import { useCreateNote, getListNotesQueryKey } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { AppLayout } from "@/components/layout/AppLayout";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Badge } from "@/components/ui/badge";
-import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowLeft, Save, X, Plus, Pin } from "lucide-react";
+import { ArrowLeft, Save, X, Pin, Loader2 } from "lucide-react";
 import { Link } from "wouter";
+import { motion } from "framer-motion";
 
 export function CreateNote() {
   const [, setLocation] = useLocation();
@@ -26,37 +23,32 @@ export function CreateNote() {
   const [isPinned, setIsPinned] = useState(false);
 
   const handleAddTag = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' || e.key === ',') {
+    if (e.key === "Enter" || e.key === ",") {
       e.preventDefault();
       const newTag = tagInput.trim().toLowerCase();
-      if (newTag && !tags.includes(newTag)) {
-        setTags([...tags, newTag]);
-      }
+      if (newTag && !tags.includes(newTag)) setTags([...tags, newTag]);
       setTagInput("");
     }
   };
 
-  const removeTag = (tagToRemove: string) => {
-    setTags(tags.filter(t => t !== tagToRemove));
-  };
+  const removeTag = (tagToRemove: string) => setTags(tags.filter((t) => t !== tagToRemove));
 
   const handleSave = () => {
     if (!title.trim()) {
       toast({ title: "Title is required", variant: "destructive" });
       return;
     }
-
     createNote.mutate(
       { data: { title, content, tags, isPinned } },
       {
         onSuccess: (newNote) => {
           queryClient.invalidateQueries({ queryKey: getListNotesQueryKey() });
-          toast({ title: "Note created successfully" });
+          toast({ title: "Note created!" });
           setLocation(`/notes/${newNote.id}`);
         },
         onError: (err) => {
           toast({ title: "Failed to create note", description: String(err), variant: "destructive" });
-        }
+        },
       }
     );
   };
@@ -64,66 +56,98 @@ export function CreateNote() {
   return (
     <AppLayout>
       <div className="max-w-3xl mx-auto space-y-6">
+
+        {/* Toolbar */}
         <div className="flex items-center justify-between">
-          <Button variant="ghost" size="sm" asChild className="-ml-3 text-muted-foreground">
-            <Link href="/notes">
-              <ArrowLeft className="mr-2 h-4 w-4" /> Back
-            </Link>
-          </Button>
+          <Link href="/notes">
+            <button className="flex items-center gap-1.5 px-3 py-2 rounded-full text-sm transition-all" style={{ color: "rgba(255,255,255,0.5)", border: "1px solid rgba(255,255,255,0.1)" }}>
+              <ArrowLeft className="h-4 w-4" /> Back
+            </button>
+          </Link>
+
           <div className="flex items-center gap-3">
-            <div className="flex items-center space-x-2 mr-4">
-              <Switch id="pin-mode" checked={isPinned} onCheckedChange={setIsPinned} />
-              <Label htmlFor="pin-mode" className="flex items-center gap-1.5 cursor-pointer">
-                <Pin className={`h-4 w-4 ${isPinned ? 'text-primary fill-primary' : 'text-muted-foreground'}`} />
-                Pinned
-              </Label>
-            </div>
-            <Button onClick={handleSave} disabled={createNote.isPending || !title.trim()}>
-              <Save className="mr-2 h-4 w-4" /> Save Note
-            </Button>
+            <button
+              onClick={() => setIsPinned(!isPinned)}
+              className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium transition-all"
+              style={isPinned
+                ? { background: "rgba(59,130,246,0.2)", color: "#60a5fa", border: "1px solid rgba(59,130,246,0.35)" }
+                : { background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.45)", border: "1px solid rgba(255,255,255,0.1)" }}
+            >
+              <Pin className={`h-4 w-4 ${isPinned ? "fill-current" : ""}`} />
+              {isPinned ? "Pinned" : "Pin"}
+            </button>
+
+            <button
+              onClick={handleSave}
+              disabled={createNote.isPending || !title.trim()}
+              className="flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold text-white transition-all disabled:opacity-40 disabled:scale-95"
+              style={{ background: "linear-gradient(135deg, #a855f7, #6366f1)", boxShadow: "0 0 20px rgba(168,85,247,0.4)" }}
+            >
+              {createNote.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
+              Save Note
+            </button>
           </div>
         </div>
 
-        <div className="bg-card rounded-xl border shadow-sm overflow-hidden">
-          <div className="p-6 md:p-8 space-y-6">
+        {/* Editor card */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="rounded-2xl overflow-hidden"
+          style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(168,85,247,0.25)", backdropFilter: "blur(16px)", boxShadow: "0 8px 40px rgba(168,85,247,0.12)" }}
+        >
+          {/* Gradient top strip */}
+          <div className="h-1" style={{ background: "linear-gradient(90deg, #a855f7, #3b82f6, #ec4899)" }} />
+
+          <div className="p-6 md:p-10 space-y-6">
+            {/* Title */}
             <Input
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="Note Title"
-              className="text-3xl md:text-4xl font-serif font-bold border-0 px-0 h-auto rounded-none focus-visible:ring-0 placeholder:text-muted-foreground/50 bg-transparent"
+              placeholder="Note title..."
               autoFocus
+              className="text-3xl md:text-4xl font-bold border-0 px-0 h-auto rounded-none focus-visible:ring-0 focus-visible:ring-offset-0 bg-transparent placeholder:text-white/20"
+              style={{ color: "white" }}
             />
-            
-            <div className="space-y-3">
-              <div className="flex flex-wrap gap-2 items-center min-h-[2.5rem]">
-                {tags.map(tag => (
-                  <Badge key={tag} variant="secondary" className="px-3 py-1 text-sm bg-primary/10 text-primary hover:bg-primary/20 transition-colors flex items-center gap-1.5">
-                    {tag}
-                    <button onClick={() => removeTag(tag)} className="hover:text-destructive focus:outline-none rounded-full p-0.5 hover:bg-primary/20">
-                      <X className="h-3 w-3" />
-                    </button>
-                  </Badge>
-                ))}
-                <div className="relative flex-1 min-w-[120px] max-w-[200px]">
-                  <Input
-                    value={tagInput}
-                    onChange={(e) => setTagInput(e.target.value)}
-                    onKeyDown={handleAddTag}
-                    placeholder={tags.length === 0 ? "Add tags (press Enter)..." : "Add another..."}
-                    className="h-8 text-sm border-dashed bg-muted/30 focus-visible:ring-1"
-                  />
-                </div>
-              </div>
+
+            {/* Divider */}
+            <div style={{ height: 1, background: "rgba(255,255,255,0.08)" }} />
+
+            {/* Tags */}
+            <div className="flex flex-wrap gap-2 items-center min-h-[2.25rem]">
+              {tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium"
+                  style={{ background: "rgba(168,85,247,0.2)", color: "#c084fc", border: "1px solid rgba(168,85,247,0.3)" }}
+                >
+                  {tag}
+                  <button onClick={() => removeTag(tag)} className="hover:text-white transition-colors">
+                    <X className="h-3 w-3" />
+                  </button>
+                </span>
+              ))}
+              <Input
+                value={tagInput}
+                onChange={(e) => setTagInput(e.target.value)}
+                onKeyDown={handleAddTag}
+                placeholder={tags.length === 0 ? "Add tags (Enter)..." : "Add more..."}
+                className="h-8 w-36 text-sm border-0 focus-visible:ring-0 bg-transparent px-0 placeholder:text-white/25"
+                style={{ color: "rgba(255,255,255,0.7)" }}
+              />
             </div>
 
+            {/* Content */}
             <Textarea
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              placeholder="Start writing..."
-              className="min-h-[400px] text-lg resize-none border-0 px-0 focus-visible:ring-0 bg-transparent placeholder:text-muted-foreground/50 leading-relaxed"
+              placeholder="Start writing your thoughts..."
+              className="min-h-[420px] text-base resize-none border-0 px-0 focus-visible:ring-0 bg-transparent placeholder:text-white/20 leading-relaxed"
+              style={{ color: "rgba(255,255,255,0.85)" }}
             />
           </div>
-        </div>
+        </motion.div>
       </div>
     </AppLayout>
   );
