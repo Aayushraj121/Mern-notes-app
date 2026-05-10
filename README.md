@@ -1,12 +1,8 @@
 <div align="center">
 
-# 🚀 MERN Secure Notes
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f172a,100:2563eb&height=220&section=header&text=MERN%20Secure%20Notes&fontSize=42&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Secure%20Multi-user%20Notes%20Application&descAlignY=58&descSize=18"/>
 
-### 🔐 A Secure Multi-user Notes Application Built with MERN Stack
-
-<p align="center">
-  <img src="./assets/demo.gif" alt="Project Demo" width="100%" />
-</p>
+<br/>
 
 <p align="center">
 
@@ -18,100 +14,177 @@
 
 <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white"/>
 
-<img src="https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens"/>
+<img src="https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens"/>
 
-<img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge"/>
 
 </p>
 
-<p align="center">
-✨ Secure • Fast • Responsive • Full Stack ✨
-</p>
+<h3 align="center">
+🚀 Full Stack Secure Notes Application with Authentication, Authorization, Search & Pagination
+</h3>
+
+<br/>
+
+<img src="https://readme-typing-svg.herokuapp.com?font=Poppins&weight=600&size=24&pause=1000&color=3B82F6&center=true&vCenter=true&width=700&lines=JWT+Authentication;Protected+CRUD+Operations;Role-Based+Authorization;MongoDB+Search+%26+Pagination;Modern+Responsive+UI"/>
 
 </div>
 
 ---
 
-# 📌 Overview
+# 🌟 Overview
 
-MERN Secure Notes is a modern full-stack Notes Management application where users can securely create, update, delete, search, and manage notes with JWT authentication and protected APIs.
+MERN Secure Notes is a modern and secure full-stack Notes Management application where users can:
 
-This project focuses on:
-- 🔐 Authentication & Authorization
-- 📝 Notes CRUD Operations
+✨ Create Notes  
+✨ Edit Notes  
+✨ Delete Notes  
+✨ Search Notes  
+✨ Manage Personal Notes Securely  
+
+The project implements:
+- 🔐 JWT Authentication
+- 👤 Role-based Authorization
 - 🔎 Search & Pagination
-- 👤 Owner-only Access Control
-- ⚡ REST API Integration
+- ⚡ Protected REST APIs
 - 🎨 Modern Responsive UI
+
+---
+
+# 🎥 Live Preview
+
+<div align="center">
+
+## 🚀 Application Demo
+
+<img src="./assets/demo.gif" width="100%" alt="Demo GIF"/>
+
+</div>
+
+> ⚠️ IMPORTANT:
+> Put your animation GIF inside:
+>
+> ```bash
+> assets/demo.gif
+> ```
 
 ---
 
 # ✨ Features
 
-## 🔐 Authentication
-- User Signup & Login
+<table>
+<tr>
+<td width="50%">
+
+### 🔐 Authentication
+- User Signup/Login
 - JWT Authentication
-- Password Hashing using bcrypt
+- bcrypt Password Hashing
 - Protected Routes
-- Persistent Login Sessions
 
----
+</td>
 
-## 📝 Notes Management
+<td width="50%">
+
+### 📝 Notes Management
 - Create Notes
 - Edit Notes
 - Delete Notes
-- User-specific Notes
-- Secure Dashboard
+- Dashboard Access
 
----
+</td>
+</tr>
 
-## 🔎 Search & Pagination
-- Search notes by title/content
-- MongoDB Regex Search
-- Tag Filtering
+<tr>
+<td width="50%">
+
+### 🔎 Search & Pagination
+- Search Notes
+- Regex Queries
 - Pagination Controls
+- Tag Filtering
 
----
+</td>
 
-## 👮 Authorization
-- Owner-only Edit/Delete
-- Admin Moderation
-- Protected APIs
+<td width="50%">
+
+### 👮 Authorization
+- Owner-only Access
+- Admin Control
+- Secure APIs
+- Middleware Protection
+
+</td>
+</tr>
+</table>
 
 ---
 
 # 🛠️ Tech Stack
+
+<div align="center">
 
 | Frontend | Backend | Database | Authentication |
 |----------|----------|-----------|----------------|
 | React.js | Node.js | MongoDB | JWT |
 | Axios | Express.js | Mongoose | bcrypt |
 
+</div>
+
 ---
 
-# 📂 Folder Structure
+# 📸 Screenshots
+
+<div align="center">
+
+## 🔑 Login Page
+
+<img src="./screenshots/login.png" width="90%" />
+
+<br/><br/>
+
+## 📋 Dashboard
+
+<img src="./screenshots/dashboard.png" width="90%" />
+
+<br/><br/>
+
+## 📝 Notes Management
+
+<img src="./screenshots/notes.png" width="90%" />
+
+</div>
+
+> ⚠️ IMPORTANT:
+>
+> Create folder:
+>
+> ```bash
+> screenshots/
+> ```
+>
+> Add:
+> - login.png
+> - dashboard.png
+> - notes.png
+
+---
+
+# 📂 Project Structure
 
 ```bash
 mern-secure-notes/
 │
 ├── client/
-│   ├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
-│
 ├── server/
-│   ├── config/
-│   ├── middleware/
-│   ├── models/
-│   ├── routes/
-│   └── controllers/
-│
 ├── assets/
 │   └── demo.gif
 │
 ├── screenshots/
+│   ├── login.png
+│   ├── dashboard.png
+│   └── notes.png
+│
 ├── README.md
 └── .env.example
 ```
@@ -119,8 +192,6 @@ mern-secure-notes/
 ---
 
 # ⚙️ Environment Variables
-
-Create a `.env` file inside the server folder:
 
 ```env
 PORT=5000
@@ -130,9 +201,9 @@ JWT_SECRET=your_secret_key
 
 ---
 
-# 🚀 Installation & Setup
+# 🚀 Installation
 
-## 1️⃣ Clone Repository
+## Clone Repository
 
 ```bash
 git clone https://github.com/Aayushraj121/mern-secure-notes.git
@@ -140,7 +211,7 @@ git clone https://github.com/Aayushraj121/mern-secure-notes.git
 
 ---
 
-## 2️⃣ Install Dependencies
+## Install Dependencies
 
 ### Backend
 
@@ -158,7 +229,7 @@ npm install
 
 ---
 
-## 3️⃣ Run Backend
+## Run Backend
 
 ```bash
 npm run server
@@ -166,7 +237,7 @@ npm run server
 
 ---
 
-## 4️⃣ Run Frontend
+## Run Frontend
 
 ```bash
 npm start
@@ -174,71 +245,35 @@ npm start
 
 ---
 
-# 🌐 Live Demo
-
-## 🚀 Frontend
-Add Frontend Link Here
-
-## ⚙️ Backend API
-Add Backend Link Here
-
----
-
-# 📸 Screenshots
-
-## 🔑 Login Page
-
-<p align="center">
-  <img src="./screenshots/login.png" width="90%" />
-</p>
-
----
-
-## 📋 Dashboard
-
-<p align="center">
-  <img src="./screenshots/dashboard.png" width="90%" />
-</p>
-
----
-
-## 📝 Notes Management
-
-<p align="center">
-  <img src="./screenshots/notes.png" width="90%" />
-</p>
-
----
-
 # 🔥 Core Functionalities
 
 ✅ JWT Authentication  
-✅ Role-based Authorization  
 ✅ Protected CRUD APIs  
-✅ MongoDB Regex Search  
-✅ Pagination Logic  
-✅ Owner-only Authorization  
-✅ REST API Integration  
+✅ Role-based Authorization  
+✅ Search & Pagination  
+✅ MongoDB Regex Queries  
 ✅ Responsive UI  
+✅ Secure Backend APIs  
 
 ---
 
-# 📚 What I Learned
+# 📚 Learning Outcomes
 
-- MERN Stack Architecture
-- JWT Authentication Flow
-- MongoDB Query Operations
-- Pagination & Filtering
-- Backend Authorization
-- React State Management
+This project helped me improve:
+
+- MERN Stack Development
+- Authentication Workflows
+- MongoDB Query Optimization
 - REST API Development
+- Backend Security
+- React State Management
 
 ---
 
 # 🚀 Future Improvements
 
 - 🌙 Dark Mode
-- 📎 File Upload Support
+- 📎 File Uploads
 - 🤝 Real-time Collaboration
 - 🔔 Notifications
 - 📝 Rich Text Editor
@@ -247,22 +282,34 @@ Add Backend Link Here
 
 # 👨‍💻 Author
 
+<div align="center">
+
 ## Aayush Raj
 
-### 🔗 GitHub
-https://github.com/Aayushraj121
+<a href="https://github.com/Aayushraj121">
+<img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github"/>
+</a>
 
-### 💼 LinkedIn
-Add Your LinkedIn Profile Here
+</div>
 
 ---
 
 # ⭐ Support
 
-If you like this project, consider giving it a ⭐ on GitHub!
+<div align="center">
+
+If you like this project, give it a ⭐ on GitHub!
+
+</div>
 
 ---
 
 # 📜 License
 
-This project is licensed under the **MIT License**.
+<div align="center">
+
+Licensed under the MIT License.
+
+</div>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:2563eb,100:0f172a&height=120&section=footer"/>
