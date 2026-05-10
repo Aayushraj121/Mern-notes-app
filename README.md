@@ -34,20 +34,21 @@
 
 # 🌟 Overview
 
-MERN Secure Notes is a modern and secure full-stack Notes Management application where users can:
+MERN Secure Notes is a secure and modern full-stack Notes Management application built using the MERN Stack.
 
-✨ Create Notes  
-✨ Edit Notes  
-✨ Delete Notes  
-✨ Search Notes  
-✨ Manage Personal Notes Securely  
+Users can:
+- ✨ Create Notes
+- ✨ Edit Notes
+- ✨ Delete Notes
+- ✨ Search Notes
+- ✨ Manage Personal Notes Securely
 
-The project implements:
+This project implements:
 - 🔐 JWT Authentication
 - 👤 Role-based Authorization
 - 🔎 Search & Pagination
 - ⚡ Protected REST APIs
-- 🎨 Modern Responsive UI
+- 🎨 Responsive UI
 
 ---
 
@@ -55,14 +56,11 @@ The project implements:
 
 <div align="center">
 
-## 🚀 Application Demo
-
 <img src="./assets/demo.gif" width="100%" alt="Demo GIF"/>
 
 </div>
 
-> ⚠️ IMPORTANT:
-> Put your animation GIF inside:
+> ⚠️ Place your animated GIF inside:
 >
 > ```bash
 > assets/demo.gif
@@ -133,43 +131,6 @@ The project implements:
 
 ---
 
-# 📸 Screenshots
-
-<div align="center">
-
-## 🔑 Login Page
-
-<img src="./screenshots/login.png" width="90%" />
-
-<br/><br/>
-
-## 📋 Dashboard
-
-<img src="./screenshots/dashboard.png" width="90%" />
-
-<br/><br/>
-
-## 📝 Notes Management
-
-<img src="./screenshots/notes.png" width="90%" />
-
-</div>
-
-> ⚠️ IMPORTANT:
->
-> Create folder:
->
-> ```bash
-> screenshots/
-> ```
->
-> Add:
-> - login.png
-> - dashboard.png
-> - notes.png
-
----
-
 # 📂 Project Structure
 
 ```bash
@@ -179,11 +140,6 @@ mern-secure-notes/
 ├── server/
 ├── assets/
 │   └── demo.gif
-│
-├── screenshots/
-│   ├── login.png
-│   ├── dashboard.png
-│   └── notes.png
 │
 ├── README.md
 └── .env.example
