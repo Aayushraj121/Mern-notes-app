@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { format } from "date-fns";
 import { Pin, Calendar, Tag } from "lucide-react";
-import { Note } from "@workspace/api-client-react/src/generated/api.schemas";
+import { Note } from "@workspace/api-client-react";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -63,7 +63,7 @@ export function NoteCard({ note, index }: NoteCardProps) {
           <CardFooter className="pt-0 flex flex-col items-start gap-4">
             {note.tags && note.tags.length > 0 && (
               <div className="flex flex-wrap gap-1.5">
-                {note.tags.slice(0, 3).map((tag) => (
+                {note.tags.slice(0, 3).map((tag: string) => (
                   <Badge key={tag} variant="secondary" className="bg-secondary/50 hover:bg-secondary text-xs px-2 py-0.5 rounded-sm font-normal">
                     {tag}
                   </Badge>

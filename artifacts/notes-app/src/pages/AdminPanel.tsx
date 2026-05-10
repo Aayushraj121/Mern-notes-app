@@ -49,7 +49,8 @@ export function AdminPanel() {
     limit
   }, {
     query: {
-      enabled: isAdmin
+      enabled: isAdmin,
+      queryKey: getAdminListNotesQueryKey({ search: debouncedSearch || undefined, page, limit })
     }
   });
 
